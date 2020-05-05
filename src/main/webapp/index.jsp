@@ -22,7 +22,13 @@
                         <label class="form-label">Student Name</label>    
                         <input type="text" class="form-control" placeholder="Student Name" name="sname" id="sname" required>                        
                     </div>
+                    
+                    <div allight ="left">
+                        <label class="form-label">Student number</label>    
+                        <input type="text" class="form-control" placeholder="Student Name" name="sname" id="snumber" required>                        
+                    </div>
 
+                    
                     <div allight ="left">
                         <label class="form-label">Course</label>    
                         <input type="text" class="form-control" placeholder="Course" name="course" id="course" required>                        
@@ -56,11 +62,11 @@
                             </tr>
 
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
                             </tr>    
 
                     </table>    
