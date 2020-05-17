@@ -4,9 +4,10 @@
 
 <%
     if (request.getParameter("submit") != null) {
-        String firstname = request.getParameter("sfirstname");
-        String lastname = request.getParameter("slastname");
-        String studentnumber = request.getParameter("snumber");
+        String coursename = request.getParameter("scoursename");
+        String coursefee = request.getParameter("scoursefee");
+        String coursedescription = request.getParameter("scoursedescription");
+        String courseduration = request.getParameter("scourseduration");
         
 
         Connection con;
@@ -16,7 +17,7 @@
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost/universitate", "andrei", "12345");
 
-        pstCheckDatabase = con.prepareStatement("select * from students where student_number = '" + studentnumber + "' ");
+        pstCheckDatabase = con.prepareStatement("select * from courses where course_name = '" + coursename + "' ");
         rs = pstCheckDatabase.executeQuery();
 
         int nr = 0;
@@ -29,10 +30,12 @@
 <script>alert('Datele exista deja in baza!');</script>
 <%
 } else {
-    pst = con.prepareStatement("insert into students (first_name,last_name, student_number)values(?,?,?)");
-    pst.setString(1, firstname);
-    pst.setString(2, lastname);
-    pst.setString(3, studentnumber);
+    pst = con.prepareStatement("insert into courses (course_name,course_fee,course_description,duration)values(?,?,?,?)");
+    pst.setString(1, coursename);
+    pst.setString(2, coursefee);
+    pst.setString(3, coursedescription);
+    pst.setString(4, courseduration);
+
     pst.executeUpdate();
 %>
 <script>alert('Record added');</script>
@@ -49,32 +52,34 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student registration</title>
+        <title>Add Courses</title>
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Student Registration System</h1>
+        <h1>Add Courses</h1>
         </br>
-        <a href="add_course.jsp">Add course</a>     &nbsp;
-        <a href="add_schedule.jsp">Add schedule</a>   &nbsp;
-        <a href="view_students.jsp">View students</a>
+
         <div class= "row">
             <div class ="col-sm-4">
                 <form  method="POST" action ="#">
                     <div allight ="left">
-                        <label class="form-label">Student First Name</label>    
-                        <input type="text" class="form-control" placeholder="Student Firts Name" name="sfirstname" id="sfirstname" required>                        
+                        <label class="form-label">Course Name</label>    
+                        <input type="text" class="form-control" placeholder="Course Name" name="scoursename" id="scoursename" required>                        
                     </div>
 
                     <div allight ="left">
-                        <label class="form-label">Student Last Name</label>    
-                        <input type="text" class="form-control" placeholder="Student Last Name" name="slastname" id="slastname" required>                        
+                        <label class="form-label">Course Fee</label>    
+                        <input type="number" class="form-control" placeholder="Course Fee" name="scoursefee" id="scoursefee" required>                        
                     </div>
 
                     <div allight ="left">
-                        <label class="form-label">Student number</label>    
-                        <input type="text" class="form-control" placeholder="Student Number" name="snumber" id="snumber" required>                        
+                        <label class="form-label">Course Description</label>    
+                        <input type="text" class="form-control" placeholder="Course Description" name="scoursedescription" id="scoursedescription" required>                        
+                    </div>
+                     <div allight ="left">
+                        <label class="form-label">Course Duration</label>    
+                        <input type="text" class="form-control" placeholder="Course Duration" name="scourseduration" id="scourseduration" required>                        
                     </div>
                     </br>
                     <div allight ="right">
