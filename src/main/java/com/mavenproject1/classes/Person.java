@@ -28,17 +28,17 @@ public class Person implements Cloneable, Serializable,ValidateString {
         this.phone = "";
         this.emailaddress = "";
         this.address = "";
-        this.studentnumber = 0;
+        
     }
 
-    public Person(String firstname, String lastname, String personalIdentityCode, String phone, String emailAddress, String address, int studentnumber) {
+    public Person(String firstname, String lastname, String personalIdentityCode, String phone, String emailAddress, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.personalIdentityCode = personalIdentityCode;
         this.phone = phone;
         this.emailaddress = emailAddress;
         this.address = address;
-        this.studentnumber = studentnumber;
+        
     }
 
     public String get_firstname() {
