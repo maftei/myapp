@@ -3,22 +3,22 @@
 <%@page import="java.sql.*" %>
 
 <%
- // verificare daca este logat
- int ok = 1;
- if(session["id_logat"] <= 0)
- {
-     out.println("Nu sunteti autentificat!");
-     ok = 0;
- }
- if(session["tip_user_logat"] != 1 && session["tip|] != 2])
- {
-     out.println("Nu aveti drepturi de acces la aceasta sectiune!");
-     ok = 0;
- }
- if(ok == 0)
- {
-     die();
- }
+// // verificare daca este logat
+// int ok = 1;
+// if(session["id_logat"] <= 0)
+// {
+//     out.println("Nu sunteti autentificat!");
+//     ok = 0;
+// }
+// if(session["tip_user_logat"] != 1 && session["tip|] != 2])
+// {
+//     out.println("Nu aveti drepturi de acces la aceasta sectiune!");
+//     ok = 0;
+// }
+// if(ok == 0)
+// {
+//     die();
+// }
 %>
 
 
