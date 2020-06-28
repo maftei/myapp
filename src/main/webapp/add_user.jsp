@@ -8,7 +8,7 @@
    
     if (request.getParameter("submit") != null) {
        
-        String studentnumber = request.getParameter("snumber");
+        String phone = request.getParameter("sphone");
         
         Person p1 =new Person();
         
@@ -18,6 +18,9 @@
         
         if(p1.set_lastname(request.getParameter("slastname")) == 0)
             ok =0;
+        
+        p1.setPhone(request.getParameter("sphone"));
+            
         
         
         if (ok == 1)
@@ -29,7 +32,7 @@
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/universitate", "andrei", "12345");
 
-            pstCheckDatabase = con.prepareStatement("SELECT * FROM students WHERE student_number = '" + studentnumber + "' ");
+            pstCheckDatabase = con.prepareStatement("SELECT * FROM students WHERE phone = '" + phone + "' ");
             rs = pstCheckDatabase.executeQuery();
 
             int nr = 0;
@@ -44,10 +47,10 @@
             <script>alert('Datele exista deja in baza!');</script>
             <%
             } else {
-                pst = con.prepareStatement("INSERT INTO students (first_name,last_name, student_number) VALUES (?,?,?)");
+                pst = con.prepareStatement("INSERT INTO students (first_name,last_name,phone ) VALUES (?,?,?)");
                 pst.setString(1, p1.get_firstname());
                 pst.setString(2, p1.get_lastname());
-                pst.setString(3, studentnumber);
+                pst.setString(3, p1.getPhone());
                 pst.executeUpdate();
                 %>
                 <script>alert('Record added');</script>
@@ -81,8 +84,8 @@
             </div>
 
             <div allight ="left">
-                <label class="form-label">Student number</label>    
-                <input type="text" class="form-control" placeholder="Student Number" name="snumber" id="snumber" required>                        
+                <label class="form-label">Phone number</label>    
+                <input type="number" class="form-control" placeholder="Phone Number" name="sphone" id="sphone" required>                        
             </div>
             </br>
             <div allight ="right">
