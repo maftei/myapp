@@ -11,20 +11,11 @@ import java.io.Serializable;
  *
  * @author razvan
  */
-public class Student extends User implements Cloneable, Serializable{
+public class Student  implements Cloneable, Serializable{
     
-   
-    public  Student()
-  {
-      super();
-  
-  }
-    
-    public Student (String firstname, String lastname, String phone, String emailAddress, String address,String username, String password)
+    public Student (String studentNUmber,String firstname, String lastname, String phone, String emailAddress, String address,String username, String password)
     {
-        super(firstname, lastname, phone, emailAddress, address,username,password);
+         
     }
-    
-    
     
 }

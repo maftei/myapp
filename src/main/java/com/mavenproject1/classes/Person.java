@@ -12,41 +12,30 @@ import java.util.regex.Pattern;
  *
  * @author razvan
  */
-public class Person implements Cloneable, Serializable,ValidateString {
+public class Person implements Cloneable, Serializable, ValidateString {
 
     String firstname;
-    String lastname;  
+    String lastname;
     String phone;
     String emailaddress;
     String address;
+
     
-
-    public Person() {
-        this.firstname = "";
-        this.lastname = "";  
-        this.phone = "";
-        this.emailaddress = "";
-        this.address = "";
-        
-    }
-
     public Person(String firstname, String lastname, String phone, String emailAddress, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.emailaddress = emailAddress;
         this.address = address;
-        
+
     }
 
     public String get_firstname() {
         return firstname;
     }
 
-    public int set_firstname(String pfirstname) 
-    {
-        if (personnameValidation(pfirstname) == 1)
-        {
+    public int set_firstname(String pfirstname) {
+        if (personnameValidation(pfirstname) == 1) {
             this.firstname = pfirstname;
             return 1;
         }
@@ -58,26 +47,21 @@ public class Person implements Cloneable, Serializable,ValidateString {
     }
 
     public int set_lastname(String plastname) {
-        if (personnameValidation(plastname) == 1)
-        {
+        if (personnameValidation(plastname) == 1) {
             this.lastname = plastname;
             return 1;
         }
         return 0;
     }
-    
-    public String get_emailaddress()
-    {
+
+    public String get_emailaddress() {
         return emailaddress;
     }
-    
-    public boolean set_emailaddress(String pemailaddress)
-    {
-        if(emailValidation(emailaddress) == true){
+
+    public void  set_emailaddress(String pemailaddress) {
+        if (pemailaddress != null)
             this.emailaddress=pemailaddress;
-            return true;
-        }
-        return false;
+        
     }
 
     public String getPhone() {
@@ -87,37 +71,52 @@ public class Person implements Cloneable, Serializable,ValidateString {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-     
     
+    public String get_address()
+    {
+        return address;
+    }
+    
+    public void  set_address(String address)
+    {
+        if(address!=null)
+            this.address=address;
+    }
     
     
 
-    @Override
-    public boolean emailValidation(String emailaddress) {
-        if (emailaddress == null) 
-            return false; 
-        
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
-                            "[a-zA-Z0-9_+&*-]+)*@" + 
-                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
-                            "A-Z]{2,7}$"; 
-                              
-        Pattern pat = Pattern.compile(emailRegex); 
-        return pat.matcher(emailaddress).matches(); 
-    }
+//    @Override
+//    public boolean emailValidation(String emailaddress) {
+//        if (emailaddress == null) {
+//            return false;
+//        }
+//        
+//        else{
+//            this.emailaddress = emailaddress;
+//        }
+//
+//        return true;
+////        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
+////                + "[a-zA-Z0-9_+&*-]+)*@"
+////                + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
+////                + "A-Z]{2,7}$";
+////
+////        Pattern pat = Pattern.compile(emailRegex);
+////        return pat.matcher(emailaddress).matches();
+//    }
 
     @Override
     public int personnameValidation(String personname) {
-        
+
         if (personname == null) {
             return 0;
         }
-        for(int i =0; i<= personname.length(); i++)
-        {
-            if (!(personname.charAt(i) >= 'A' && personname.charAt(i) <= 'Z' || personname.charAt(i) >= 'a' && personname.charAt(i) <='z' || personname.charAt(i) == ' '))
+        for (int i = 0; i < personname.length(); i++) {
+            if (!(personname.charAt(i) >= 'A' && personname.charAt(i) <= 'Z' || personname.charAt(i) >= 'a' && personname.charAt(i) <= 'z' || personname.charAt(i) == ' ')) {
                 return 0;
+            }
         }
-        
+
         return 1;
     }
 
@@ -126,5 +125,15 @@ public class Person implements Cloneable, Serializable,ValidateString {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
+//    @Override
+//    public boolean emailValidation(String emailaddress) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
 }
+
+
+//    @Override
+//    public String toString() { 
+//        return static String toString(int i)
+//    } 

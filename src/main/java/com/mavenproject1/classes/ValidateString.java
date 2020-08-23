@@ -11,7 +11,7 @@ package com.mavenproject1.classes;
  */
 public interface ValidateString {
     
-    public boolean emailValidation(String emailaddress);
+//    public boolean emailValidation(String emailaddress);
     
     public int personnameValidation (String personname);
     
