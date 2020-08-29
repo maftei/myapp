@@ -1,202 +1,117 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="index1.jsp" %>
+<%@page import="java.sql.*" %>
+<%@page import="com.mavenproject1.classes.User"%> 
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="register-form.css">
-    </head>
-    <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-font-smoothing: antialiased;
-            -o-font-smoothing: antialiased;
-            font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
+
+<%
+
+    if (request.getParameter("submit") != null) {
+
+        String phone = request.getParameter("sphone");
+        String firstname = request.getParameter("sfirstname");
+        String lastname = request.getParameter("slastname");
+        String emailaddress = request.getParameter("semailaddress");
+        String address = request.getParameter("saddress");
+        String username = request.getParameter("susername");
+        String password = request.getParameter("spassword");
+
+        User u1 = new User(username,password, firstname, lastname, address, phone, emailaddress);
+       
+
+        User v[] = new User[500];
+        int n = 0;
+        
+        if (session.getAttribute("n_user") != null)
+        {
+            System.out.println("Initializare");
+            v = (User[]) session.getAttribute("vector_user");
+            n = Integer.parseInt(String.valueOf(session.getAttribute("n_user")));
         }
 
-        body {
-            font-family: "Roboto", Helvetica, Arial, sans-serif;
-            font-weight: 100;
-            font-size: 12px;
-            line-height: 30px;
-            color: #777;
-            background: #87CEEB;
+        if (n == 0) 
+        {
+            out.println("Nu exista persoane  in sesiune!");
         }
-
-        .container {
-            max-width: 400px;
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
+//
+        for (int i = 0; i <= n - 1; i++) 
+        {
+            out.println(v[i].get_username());
         }
+//
+        v[n] = u1;
+        n++;
 
-        #contact input[type="text"],
-        #contact input[type="email"],
-        #contact input[type="tel"],
-        #contact input[type="url"],
-        #contact textarea,
-        #contact button[type="submit"] {
-            font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
-        }
+        session.setAttribute("vector_user", v);
+        session.setAttribute("n_user", n);
+%>
+//<script>alert('Datele exista deja in baza!');</script>
+<%
+    }
 
-        #contact {
-            background: #F9F9F9;
-            padding: 25px;
-            margin: 150px 0;
-            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-        }
+%>
 
-        #contact h3 {
-            display: block;
-            font-size: 30px;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
 
-        #contact h4 {
-            margin: 5px 0 15px;
-            display: block;
-            font-size: 13px;
-            font-weight: 400;
-        }
 
-        fieldset {
-            border: medium none !important;
-            margin: 0 0 10px;
-            min-width: 100%;
-            padding: 0;
-            width: 100%;
-        }
 
-        #contact input[type="text"],
-        #contact input[type="email"],
-        #contact input[type="tel"],
-        #contact input[type="url"],
-        #contact textarea {
-            width: 100%;
-            border: 1px solid #ccc;
-            background: #FFF;
-            margin: 0 0 5px;
-            padding: 10px;
-        }
+<%@include file="indexA.jsp" %>
 
-        #contact input[type="text"]:hover,
-        #contact input[type="email"]:hover,
-        #contact input[type="tel"]:hover,
-        #contact input[type="url"]:hover,
-        #contact textarea:hover {
-            -webkit-transition: border-color 0.3s ease-in-out;
-            -moz-transition: border-color 0.3s ease-in-out;
-            transition: border-color 0.3s ease-in-out;
-            border: 1px solid #aaa;
-        }
 
-        #contact textarea {
-            height: 100px;
-            max-width: 100%;
-            resize: none;
-        }
+<h1>User Registration System</h1>
+</br>
 
-        #contact button[type="submit"] {
-            cursor: pointer;
-            width: 100%;
-            border: none;
-            background: #0000CD;
-            color: #FFF;
-            margin: 0 0 5px;
-            padding: 10px;
-            font-size: 15px;
-        }
+<div class= "row">
+    <div class ="col-sm-4">
+        <form  method="POST" action ="#">
+            
+            <div allight ="left">
+                <label class="form-label"> Username </label>    
+                <input type="text" class="form-control" placeholder="Username" name="susername" id="susername" required>                        
+            </div>
+            
+            <div allight ="left">
+                <label class="form-label"> Password </label>    
+                <input type="password" class="form-control" placeholder="Paasword" name="spassword" id="spassword" required>                        
+            </div>
+            <div allight ="left">
+                <label class="form-label">First Name</label>    
+                <input type="text" class="form-control" placeholder="Student Firts Name" name="sfirstname" id="sfirstname" required>                        
+            </div>
 
-        #contact button[type="submit"]:hover {
-            background: #87CEEB;
-            -webkit-transition: background 0.3s ease-in-out;
-            -moz-transition: background 0.3s ease-in-out;
-            transition: background-color 0.3s ease-in-out;
-        }
+            <div allight ="left">
+                <label class="form-label"> Last Name</label>    
+                <input type="text" class="form-control" placeholder="Student Last Name" name="slastname" id="slastname" required>                        
+            </div>
 
-        #contact button[type="submit"]:active {
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
-        }
+            <div allight ="left">
+                <label class="form-label">Phone number</label>    
+                <input type="number" class="form-control" placeholder="Phone Number" name="sphone" id="sphone" required>                        
+            </div>
+            <div allight ="left">
+                <label class="form-label"> Email</label>    
+                <input type="text" class="form-control" placeholder=" Email" name="semailaddress" id="semailaddress" required>                        
+            </div>
+            
+            <div allight ="left">
+                <label class="form-label"> Address</label>    
+                <input type="text" class="form-control" placeholder="Student Address" name="saddress" id="saddress" required>                        
+            </div>
+            
+            </br>
+            <div allight ="right">
+                <input type="submit" id="submit" value="submit" name="submit" class="btn btn-info">    
+                <input type="reset" id="reset" value="reset" name="reset" class="btn btn-warning"> 
+            </div>        
 
-        .copyright {
-            text-align: center;
-        }
-
-        #contact input:focus,
-        #contact textarea:focus {
-            outline: 0;
-            border: 1px solid #aaa;
-        }
-
-        ::-webkit-input-placeholder {
-            color: #888;
-        }
-
-        :-moz-placeholder {
-            color: #888;
-        }
-
-        ::-moz-placeholder {
-            color: #888;
-        }
-
-        :-ms-input-placeholder {
-            color: #888;
-        }
-    </style>
-
-    <body>
-        <div class="container">  
-            <form id="contact" action="" method="post">
-                <h3> Register Form</h3>
-                <h4>Please enter your credentials</h4>
-                <fieldset>
-                    <input placeholder="Firsta Name" type="text" tabindex="1" required autofocus>
-                </fieldset>
-                <fieldset>
-                    <input placeholder="Last Name" type="text" tabindex="2" required>
-                </fieldset>
-                <fieldset>
-                    <input placeholder=" Adress " type="text" tabindex="3" required>
-                </fieldset>
-                <fieldset>
-                    <input placeholder="Phone Number (optional) " type="tel" tabindex="4" required>
-                </fieldset>
-                <fieldset>
-                    <input placeholder="Email Address" type="email" tabindex="5" required>
-                </fieldset>
-                <fieldset>
-                    <input placeholder="Username" type="text" tabindex="6" required>
-                </fieldset>
-                <fieldset>
-                    <input placeholder="Password" type="password" tabindex="7" required>
-                </fieldset>
-                
-<!--                <fieldset>
-                    <select name="cbo_user_type">
-                        <option value="0">Student</option>
-                        <option value="1">Professor</option>
-                    </select>
-                </fieldset>-->
-                
-<!--                <fieldset>
-                    <textarea placeholder="Type your message here...." tabindex="5" required></textarea>
-                </fieldset>-->
-                <fieldset>
-                    <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
-                </fieldset>
+        </form>
+        <br />
+            <form action="save_collection_user.jsp" method="post">
+                <input type="submit" id="submit" value="save collection user" name="save coolection user" class="btn btn-info">  
             </form>
-        </div>
+    </div>
 
 
-    </body>
+
+
+</body>
 </html>

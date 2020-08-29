@@ -56,6 +56,8 @@
             else 
             {
                 pst = con.prepareStatement("insert into user (username,password, firstname, lastname, address, phone, emailaddress)values(?,?,?,?,?,?,?)");
+                
+                        
                 pst.setString(1, u1.get_username());
                 pst.setString(2, u1.get_password());
                 pst.setString(3, u1.get_firstname());
@@ -63,6 +65,7 @@
                 pst.setString(5, u1.get_address());
                 pst.setString(6, u1.getPhone());
                 pst.setString(7, u1.get_emailaddress());
+                pst.setString(8, u1.get_id_user());
 
                 pst.executeUpdate();
                 out.println("The username " + u1.get_username() + " has been saved to database!");

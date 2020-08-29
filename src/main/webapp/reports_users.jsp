@@ -56,8 +56,7 @@ tr:nth-child(even) {
             pstCheckDatabase = con.prepareStatement("SELECT * FROM user ");
             rs = pstCheckDatabase.executeQuery();
 
-            int nr = 0;
-            
+           int nr = 0;
            while (rs.next()) 
             {
                out.print("<tr>");

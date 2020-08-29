@@ -5,11 +5,12 @@
 
 <%@page import="com.mavenproject1.classes.Course"%>
 <%@page import="java.util.List"%>
-<%@include file="index1.jsp" %>
+<%@include file="indexB.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
 <%
+    //de facut functie globala pemtru vctori
    
         Course vectorCursuri[] = new Course[100];
         int n;
@@ -22,7 +23,7 @@
         }
         
         Course c1;
-        for(int i=0; i<=n-1; i++)
+        for(int i = 0; i <= n-1; i++)
         {
             // out.println(v[i].getCoursename());
             c1 = vectorCursuri[i];

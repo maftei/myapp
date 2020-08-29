@@ -53,7 +53,7 @@
 %>
 
 
-<%@include file="index1.jsp" %>
+<%@include file="indexB.jsp" %>
 
 <script>
     $(function () {

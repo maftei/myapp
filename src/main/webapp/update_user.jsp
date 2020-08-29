@@ -14,12 +14,21 @@
     Class.forName("com.mysql.jdbc.Driver");
     con = DriverManager.getConnection("jdbc:mysql://localhost/universitate", "andrei", "12345");
 
-    pstCheckDatabase = con.prepareStatement("SELECT * FROM user ");
+    pstCheckDatabase = con.prepareStatement("SELECT * FROM user WHERE id=" +id);
     rs = pstCheckDatabase.executeQuery();
     
-    User u1 = new User(rs.getString("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("address"), rs.getString("phone"), rs.getString("emailaddress") );
     
-
+    rs.next();
+    User u1 = new User(rs.getString("id"), 
+            rs.getString("username"), 
+            rs.getString("password"),
+            rs.getString("firstname"), 
+            rs.getString("lastname"), 
+            rs.getString("address"), 
+            rs.getString("phone"), 
+            rs.getString("emailaddress") );
+    
+    
 %>
 //<script>alert('Datele exista deja in baza!');</script>
 
@@ -35,39 +44,40 @@
 
 <div class= "row">
     <div class ="col-sm-4">
-        <form  method="POST" action ="#">
+        <form  method="POST" action ="update_user_final.jsp">
+            <input type="hidden" name="id" value="<% out.print(u1.get_id_user()); %>" >
 
             <div allight ="left">
                 <label class="form-label"> Username </label>    
-                <input type="text" class="form-control" placeholder="Username" name="susername" id="susername" value <% out.print(u1.get_username()); %> required>                        
+                <% out.print(u1.get_username()); %>                        
             </div>
 
             <div allight ="left">
                 <label class="form-label"> Password </label>    
-                <input type="password" class="form-control" placeholder="Paasword" name="spassword" id="spassword" required>                        
+                <input type="password" class="form-control" placeholder="Paasword" name="spassword" id="spassword"  value="<% out.print(u1.get_password()); %>" required>                        
             </div>
             <div allight ="left">
                 <label class="form-label">First Name</label>    
-                <input type="text" class="form-control" placeholder="Student Firts Name" name="sfirstname" id="sfirstname" required>                        
+                <input type="text" class="form-control" placeholder="Student Firts Name" name="sfirstname" id="sfirstname" value="<% out.print(u1.get_firstname()); %>" required>                        
             </div>
 
             <div allight ="left">
                 <label class="form-label"> Last Name</label>    
-                <input type="text" class="form-control" placeholder="Student Last Name" name="slastname" id="slastname" required>                        
+                <input type="text" class="form-control" placeholder="Student Last Name" name="slastname" id="slastname" value="<% out.print(u1.get_lastname()); %>"required>                        
             </div>
 
             <div allight ="left">
                 <label class="form-label">Phone number</label>    
-                <input type="number" class="form-control" placeholder="Phone Number" name="sphone" id="sphone" required>                        
+                <input type="number" class="form-control" placeholder="Phone Number" name="sphone" id="sphone" value="<% out.print(u1.getPhone()); %>"required>                        
             </div>
             <div allight ="left">
                 <label class="form-label"> Email</label>    
-                <input type="text" class="form-control" placeholder=" Email" name="semailaddress" id="semailaddress" required>                        
+                <input type="text" class="form-control" placeholder=" Email" name="semailaddress" id="semailaddress" value="<% out.print(u1.get_emailaddress()); %>"required>                        
             </div>
 
             <div allight ="left">
                 <label class="form-label"> Address</label>    
-                <input type="text" class="form-control" placeholder="Student Address" name="saddress" id="saddress" required>                        
+                <input type="text" class="form-control" placeholder="Student Address" name="saddress" id="saddress" value="<% out.print(u1.get_address()); %>" required>                        
             </div>
 
             </br>
@@ -82,8 +92,6 @@
             <input type="submit" id="submit" value="save collection user" name="save coolection user" class="btn btn-info">  
         </form>
     </div>
-
-
 
 
 </body>

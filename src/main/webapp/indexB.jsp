@@ -101,8 +101,11 @@
                 </div>
             </div>
         </nav>
-
+        
+        <div align="right">
          utilizator: <% out.println(session.getAttribute("username_logat")); %>
+        </div>
+        
         <ul class="nav navbar-nav navbar-inverse" style="float:right">
             
             <li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> Sign out</a></li>

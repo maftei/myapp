@@ -1,6 +1,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="index1.jsp" %>
+<%@include file="indexA.jsp" %>
+<%@page import="java.sql.*" %>
+<%@page import="com.mavenproject1.classes.User"%> 
 
 <!DOCTYPE html>
 <html>
@@ -153,26 +155,66 @@
             color: #888;
         }
     </style>
-    
+
+
+    <%
+        if (request.getParameter("submit") != null) {
+            String userName = (request.getParameter("txt_username"));
+            String userPassword = (request.getParameter("txt_password"));
+
+            Connection con;
+            PreparedStatement pst, pstCheckDatabase;
+            ResultSet rs;
+
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/universitate", "andrei", "12345");
+
+            pstCheckDatabase = con.prepareStatement("SELECT * FROM user WHERE username = '" + userName + "' AND password = '" + userPassword + "' ");
+            rs = pstCheckDatabase.executeQuery();
+
+            int id_user = 0;
+            int rowsNumber = 0;
+            while (rs.next()) {
+                rowsNumber++;
+                id_user =Integer.parseInt(rs.getString("id"));
+            }
+
+            if (rowsNumber > 0) 
+            {
+                session.setAttribute("id_user_logat", id_user );
+                session.setAttribute("username_logat", userName );
+                
+                out.println("<script>alert('Datele sunt corecte!');</script>");
+                out.println("<meta http-equiv='refresh' content='0;URL=indexB.jsp'>");  
+            }
+            else
+            {
+               out.println("<script>alert('Check Username OR Password!');</script>");
+            }
+        }
+    %>
+
+
+
 
     <body>
         <div class="container">  
-            <form id="contact" action="" method="post">
+            <form id="contact" action="login.jsp" method="post">
                 <h3> Login Form</h3>
                 <h4>Please enter your credentials</h4
                 </fieldset>
                 <fieldset>
-                    <input placeholder="Username" type="text" tabindex="1" required>
+                    <input placeholder="Username" type="text" name= "txt_username" tabindex="1" required>
                 </fieldset>
                 <fieldset>
-                    <input placeholder="Password" type="password" tabindex="2" required>
+                    <input placeholder="Password" type="password"  name = "txt_password" tabindex="2" required>
                 </fieldset>
-                
-                
-                
-<!--                <fieldset>
-                    <textarea placeholder="Type your message here...." tabindex="5" required></textarea>
-                </fieldset>-->
+
+
+
+                <!--                <fieldset>
+                                    <textarea placeholder="Type your message here...." tabindex="5" required></textarea>
+                                </fieldset>-->
                 <fieldset>
                     <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Login</button>
                 </fieldset>
