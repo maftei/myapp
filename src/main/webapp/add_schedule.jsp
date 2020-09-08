@@ -6,17 +6,17 @@
     if (request.getParameter("submit") != null) {
         String choosen_course_id = request.getParameter("cbo_curs");
         String course_data = request.getParameter("datepicker");
-        
+        // formatul datei: 12-25-2008
         String zi = course_data.substring(3, 5);
         String luna = course_data.substring(0, 2);
         String an = course_data.substring(6, 10);
         
         
-        out.println(course_data);
-        out.println(an);
+//        out.println(course_data);
+//        out.println(an);
         
         course_data = an + "-" + luna + "-" + zi;
-        out.println(course_data);
+        //out.println(course_data);
         
 
         Connection con;

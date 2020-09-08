@@ -42,6 +42,7 @@ tr:nth-child(even) {
     <th>Password</th>
     <th>First Name</th>
     <th>Update</th>
+    <th>Delete</th>
   </tr>
   
   <%
@@ -75,6 +76,10 @@ tr:nth-child(even) {
                
                out.print("<td>");
                out.println("<a href='update_user.jsp?id=" +rs.getString("id") +"'>Modificare</a>");
+               out.print("</td>");
+               
+               out.print("<td>");
+               out.println("<a href='delete_user.jsp?id=" +rs.getString("id") +"'>Stergere</a>");
                out.print("</td>");
                
                out.print ("</tr>");

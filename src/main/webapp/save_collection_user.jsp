@@ -55,7 +55,7 @@
             } 
             else 
             {
-                pst = con.prepareStatement("insert into user (username,password, firstname, lastname, address, phone, emailaddress)values(?,?,?,?,?,?,?)");
+                pst = con.prepareStatement("insert into user (username,password, firstname, lastname, address, phone, emailaddress, id) values (?,?,?,?,?,?,?,?)");
                 
                         
                 pst.setString(1, u1.get_username());

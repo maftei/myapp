@@ -43,7 +43,7 @@
         con = DriverManager.getConnection("jdbc:mysql://localhost/universitate", "andrei", "12345");
 
         pst = con.prepareStatement(sir);
-        int  ok;
+        int ok;
         ok = pst.executeUpdate();
         if (ok == 1)
         {
